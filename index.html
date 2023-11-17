@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kinoarea</title>
+  <link rel="shortcut icon" href="/public/logo.svg" type="image/png">
+  <link rel="stylesheet" href="style.scss">
+</head>
+
+<body>
+  <div class="movie_bg">
+    <header>
+      <div class="container">
+        <div class="header">
+          <div class="head_box" id="logo">
+            <span class="logo">
+              <img src="/public/logo.svg" alt="Logo">
+              <p><span>Kino</span>area</p>
+            </span>
+            <img src="/public/links.png" alt="">
+          </div>
+          <nav>
+            <a href="#">Афиша</a>
+            <a href="#">Медиа</a>
+            <a href="#">Фильмы</a>
+            <a href="#">Актёры</a>
+            <a href="#">Новости</a>
+            <a href="#">Подборки</a>
+            <a href="#">Категории</a>
+          </nav>
+          <div class="head_box" id="buttons">
+            <button class="search"></button>
+            <button class="signin">Войти</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="now_playing_box">
+        <h1 class="now_in_kino">Сейчас в кино</h1>
+        <hr>
+        <div class="genre_menu">
+          <a href="#" class="active">Все</a>
+          <a href="#" class="genre">Боевики</a>
+          <a href="#" class="genre">Приключения</a>
+          <a href="#" class="genre">Комедии</a>
+          <a href="#" class="genre">Фантастика</a>
+          <a href="#" class="genre">Триллеры</a>
+          <a href="#" class="genre">Драма</a>
+        </div>
+      </div>
+
+      <div class="grid_box">
+        <div class="box">
+          <div class="poster">
+            <div class="rating">8.50</div>
+            <div class="hovered">
+              <div class="movie_card">Карточка фильма</div>
+            </div>
+          </div>
+          <div class="movie_info">
+            <h1 class="movie_name">Джокер</h1>
+            <h1 class="movie_genre">Триллер, драма, криминал</h1>
+          </div>
+        </div>
+      </div>
+      <div class="show_btn">
+        <button class="show_hide">Все новинки</button>
+      </div>
+    </div>
+    <div class="next">
+      <div class="container">
+        <div class="trailers">
+          <div class="trailer_head">
+            <h1 class="new_trailers">Новые трейлеры</h1>
+            <button class="all_trailers">
+              Все трейлеры
+              <img src="/public/all.svg" alt="show_all">
+            </button>
+          </div>
+
+          <div class="trailer_body">
+            <div class="now_playing_trailer">
+              <button class="play">
+                <img src="/public/play.svg" alt="">
+              </button>
+            </div>
+
+            <div class="trailer_info">
+              <div class="trailer_box" id="first">
+                <h1 class="trailer_name">Форсаж 9</h1>
+                <img src="/public/links.png" alt="">
+              </div>
+              <div class="trailer_box" id="second">
+                <span>
+                  <button class="like">
+                    <img src="/public/like.svg" alt="like">
+                  </button>
+                  <p>3 245</p>
+                </span>
+                <span>
+                  <button class="dislike">
+                    <img src="/public/dislike.svg" alt="dislike">
+                  </button>
+                  <p>420</p>
+                </span>
+              </div>
+            </div>
+
+            <div class="another_trailers">
+              <div class="small_trailer">
+                <div class="trailer_poster" id="small_one"></div>
+                <h1>Мулан</h1>
+              </div>
+              <div class="small_trailer">
+                <div class="trailer_poster" id="small_two"></div>
+                <h1>Форсаж 9</h1>
+              </div>
+              <div class="small_trailer">
+                <div class="trailer_poster" id="small_three"></div>
+                <h1>Чёрная Вдова</h1>
+              </div>
+              <div class="small_trailer">
+                <div class="trailer_poster" id="small_four"></div>
+                <h1>Тихое место 2</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <script src="main.js"></script>
+</body>
+
+</html>
