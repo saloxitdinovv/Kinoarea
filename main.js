@@ -72,6 +72,11 @@ function reload(arr, place) {
         poster.onmouseleave = () => {
             hovered.style.display = 'none'
         }
+
+        movie_card.onclick = () => {
+            location.assign('/pages/movie_page/?id=' + item.id)
+        }
+
     }
 }
 
@@ -85,4 +90,3 @@ function reload(arr, place) {
 // })
 //     .then(res => res.json())
 //     .then(res => console.log(res))
-
