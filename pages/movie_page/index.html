@@ -10,35 +10,82 @@
 
 <body>
     <div class="movie_bg">
-        <header>
-            <div class="container">
-                <div class="header">
-                    <div class="head_box" id="logo">
-                        <span class="logo">
-                            <img src="/public/logo.svg" alt="Logo">
-                            <p><span>Kino</span>area</p>
-                        </span>
-                        <img src="/public/links.png" alt="">
-                    </div>
-                    <nav>
-                        <a href="#">Афиша</a>
-                        <a href="#">Медиа</a>
-                        <a href="#">Фильмы</a>
-                        <a href="#">Актёры</a>
-                        <a href="#">Новости</a>
-                        <a href="#">Подборки</a>
-                        <a href="#">Категории</a>
-                    </nav>
-                    <div class="head_box" id="buttons">
-                        <button class="search"></button>
-                        <button class="signin">Войти</button>
+        <div class="content">
+            <header>
+                <div class="container">
+                    <div class="header">
+                        <div class="head_box" id="logo">
+                            <span class="logo">
+                                <img src="/public/logo.svg" alt="Logo">
+                                <p><span>Kino</span>area</p>
+                            </span>
+                            <img src="/public/links.png" alt="">
+                        </div>
+                        <nav>
+                            <a href="#">Афиша</a>
+                            <a href="#">Медиа</a>
+                            <a href="#">Фильмы</a>
+                            <a href="#">Актёры</a>
+                            <a href="#">Новости</a>
+                            <a href="#">Подборки</a>
+                            <a href="#">Категории</a>
+                        </nav>
+                        <div class="head_box" id="buttons">
+                            <button class="search"></button>
+                            <button class="signin">Войти</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </header>
+            </header>
 
-        <div class="container">
-            <h1 class="movie_name"></h1>
+            <div class="container">
+
+                <div class="movie_main_info">
+                    <div class="poster"></div>
+                    <div class="info">
+                        <div class="name_tag">
+                            <div class="path">Главная > Фильмы > <span class="mini_name"></span></div>
+                            <h1 class="movie_name"></h1>
+                            <p class="tagline"></p>
+                        </div>
+                        <div class="ratings">
+                            <div class="rating_box">
+                                <div class="rating">
+                                    <p class="rate"></p>
+                                </div>
+                                <p class="rate_place">Kinoarea</p>
+                            </div>
+                        </div>
+                        <p class="description"></p>
+                        <div class="watch_trailer_links">
+                            <button class="watch">
+                                <img src="/public/small_play.svg" alt="play">
+                                Смотреть трейлер
+                            </button>
+                            <img class="social_links" src="/public/links.png" alt="links">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="like_dislike">
+                    <button class="like">
+                        <img src="/public/like.svg" alt="like">
+                    </button>
+                    <button class="dislike">
+                        <img src="/public/dislike.svg" alt="dislike">
+                    </button>
+                    <div class="waiting_rating">
+                        <div class="wait_rate">
+                            <p>Рейтинг ожиданий 85%</p>
+                        </div>
+                    </div>
+                    <button class="love">
+                        <img src="/public/love.svg" alt="love">
+                    </button>
+                    <p class="loved_people">В избранном у <span class="vout_count">___</span> человек </p>
+                </div>
+
+            </div>
         </div>
     </div>
 
