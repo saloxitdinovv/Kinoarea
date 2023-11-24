@@ -1,41 +1,21 @@
 import { show_hide } from "./modules/functions"
 import { getData } from "./modules/http"
-import { reload, reload_swiper } from "./modules/reloads"
+import { reload, reload_swiper, reload2, reload_actors, reload_search } from "./modules/reloads"
 
 let grid_box = document.querySelector('.grid_box')
 let moviesToShow = 8
 let movies
 let swiper = document.querySelector('swiper-container')
-let trailer_box = document.querySelector('.tr_box')
-
+let place = document.querySelector('.results')
+let cont2 = document.querySelector('.container2')
 
 getData('/movie/now_playing')
     .then(res => {
         movies = res.results
         reload(movies.slice(0, moviesToShow), grid_box)
         show_hide(movies, grid_box)
+        reload2(res.results, cont2)
     })
-
-
-
-
-// let genres = []
-
-
-// let api_key = '4a9088dd3837fc977699085ed3a85211'
-// let genre = `https://api.themoviedb.org/3/genre/movie/list?api_key=[${api_key}]&language=ru`
-
-// fetch(genre, {
-//     headers: {
-//         Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YTkwODhkZDM4MzdmYzk3NzY5OTA4NWVkM2E4NTIxMSIsInN1YiI6IjY1NTRjYWRjZWE4NGM3MTA5NDAwMDFlZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.dTIivT2f1mMQIEEf-gxzHim7irgnQgmOS1sOOE0mZJg'
-//     }
-// })
-//     .then(res => res.json())
-//     .then(res => {
-//         for (let genre of res.genres) {
-//             genres.push(genre)
-//         }
-//     })
 
 
 getData('/movie/popular')
@@ -44,10 +24,8 @@ getData('/movie/popular')
         reload_swiper(movies, swiper)
     })
 
-let act_box = document.querySelector('.act_list')
 
 let person_box = document.querySelector('.top')
-let other_actors_box = document.querySelector('.others')
 
 getData('/person/popular')
     .then(res => {
@@ -56,59 +34,123 @@ getData('/person/popular')
 
 
 
-function reload_actors(arr, place) {
-    place.innerHTML = ''
-
-    
-    for(let i = 0; i < 2 && i < arr.length; i++) {
-        let actor = arr[i]
-        let person = document.createElement('div')
-        let actor_name = document.createElement('h1')
-        let actor_original_name = document.createElement('h2')
-        let rate = document.createElement('p')
+let form = document.forms.search
+let search_button = document.querySelector('.search')
+let inp = document.querySelector('.search_input')
+let modal = document.querySelector('.modal')
+let body = document.body
+let close_modal = document.querySelector('.close')
 
 
-        actor_name.innerHTML = actor.name
-        actor_original_name.innerHTML = actor.name
-        rate.innerHTML = `${i + 1}-е место`
-        
-        person.classList.add('actor')
-        person.style.backgroundImage = `url(https://image.tmdb.org/t/p/w500${actor.profile_path})`
 
-        place.append(person)
-        person.append(actor_name, actor_original_name, rate)
-        console.log(actor);
+const fadeInModal = () => {
+    modal.style.display = 'block';
+    body.style.overflow = 'hidden';
+    modal.style.opacity = 0;
 
-        person.onclick = () => {
-            location.assign('/pages/actor_page/?id=' + actor.id)
+    let opacity = 0;
+
+    const fade = () => {
+        if (opacity < 1) {
+            opacity += 0.5;
+            modal.style.opacity = opacity;
+            setTimeout(fade, 50);
         }
-    }
-    let others = document.createElement('div')
-    others.classList.add('others')
-    place.append(others)
+    };
 
-    for (let i = 2; i < arr.length; i++) {
-        let actor = arr[i];
-        let person = document.createElement('div')
-        let person_name = document.createElement('p');
-        let person_orig_name = document.createElement('p');
+    fade();
+};
 
-        let span = document.createElement('span');
+const fadeOutModal = () => {
+    let opacity = 1;
 
-        person_name.classList.add('actor_name')
-        person_orig_name.classList.add('actor_orig_name')
-        person.classList.add('person')
-
-        person_name.innerHTML = actor.name
-        person_orig_name.innerHTML = actor.name
-        span.innerHTML = `${i + 1}-е место`
-
-        others.append(person)
-        person.append(person_name, person_orig_name, span)
-
-
-        person.onclick = () => {
-            location.assign('/pages/actor_page/?id=' + actor.id)
+    const fade = () => {
+        if (opacity > 0) {
+            opacity -= 0.5;
+            modal.style.opacity = opacity;
+            setTimeout(fade, 100);
+        } else {
+            modal.style.display = 'none';
+            body.style.overflowY = 'scroll';
         }
+    };
+
+    fade();
+};
+
+search_button.onclick = fadeInModal;
+
+close_modal.onclick = fadeOutModal;
+
+
+form.onsubmit = (e) => {
+    e.preventDefault();
+
+    let error = false;
+
+    if (inp.value.length === 0) {
+        error = true;
+        inp.classList.add("error");
+    } else {
+        inp.classList.remove("error");
     }
+
+    if (error) {
+        return error
+    } else {
+        submit()
+        inp.value = ''
+    }
+
 }
+
+
+
+function submit() {
+    let user = {};
+
+    let fm = new FormData(form);
+
+    fm.forEach((value, key) => {
+        user[key] = value;
+    });
+
+
+    let search_object = user.search
+
+    getData(`/search/multi?query=${search_object}`)
+        .then(res => {
+            reload_search(res.results, place)
+        })
+}
+
+
+
+let upcoming_box = document.querySelector('.upcoming_box')
+
+getData('/movie/upcoming')
+    .then(res => {
+        let upc_movies = res.results
+        reload(upc_movies.slice(0, 4), upcoming_box)
+    })
+
+getData('/genre/movie/list?')
+    .then(res => console.log(res.genres))
+
+
+let hover_img2 = document.querySelectorAll('.hover_img2')
+let youtube = document.querySelector('.youtube')
+
+hover_img2.forEach(btn => {
+    btn.onclick = () => {
+        hover_img2.forEach(el => el.style.opacity = '1')
+        let id_move = btn.getAttribute('data-move_id')
+        btn.style.opacity = '1'
+        fetch(base_url + '/movie/' + id_move + '?api_key=790c95e0985a2e338aea850a76b8ebda&append_to_response=videos', {
+            headers: {
+                Authorization: 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3OTBjOTVlMDk4NWEyZTMzOGFlYTg1MGE3NmI4ZWJkYSIsInN1YiI6IjY1NTYwNTAzNjdiNjEzNDVkYmMxMzM4MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8vyyF9E6X99GgYd-5H6vLMKAn9jq7ik3ze9-zfOwsQw'
+            }
+        }).then(res => res.json())
+            .then(res => youtube.src = `https://www.youtube.com/embed/${res.results[0].key}`)
+    }
+})
