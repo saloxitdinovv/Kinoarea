@@ -1,6 +1,6 @@
 import { show_hide } from "./modules/functions"
 import { getData } from "./modules/http"
-import { reload, reload_swiper, reload2, reload_actors, reload_search } from "./modules/reloads"
+import { reload, reload_swiper, reload_actors, reload_search } from "./modules/reloads"
 
 let grid_box = document.querySelector('.grid_box')
 let moviesToShow = 8
@@ -8,6 +8,7 @@ let movies
 let swiper = document.querySelector('swiper-container')
 let place = document.querySelector('.results')
 let cont2 = document.querySelector('.container2')
+let base_url = 'https://api.themoviedb.org/3'
 
 getData('/movie/now_playing')
     .then(res => {
@@ -154,3 +155,45 @@ hover_img2.forEach(btn => {
             .then(res => youtube.src = `https://www.youtube.com/embed/${res.results[0].key}`)
     }
 })
+
+function reload2(arr, place) {
+    for (let item of arr) {
+        let div = document.createElement('div')
+        let img = document.createElement('img')
+        let h1 = document.createElement('h1')
+        let hover = document.createElement('div')
+        let button = document.createElement('img')
+
+        button.src = '/public/play.svg'
+        button.classList.add('play')
+        div.style.marginRight = 'none'
+        img.src = `https://image.tmdb.org/t/p/w500${item.backdrop_path}`
+        h1.innerHTML = item.title
+        div.dataset.move_id = item.id
+
+        h1.classList.add('h1_post_new2')
+        hover.classList.add('hover_img2')
+        img.classList.add('img_post_new2')
+        div.classList.add('place_img2')
+        place.append(div)
+        div.append(img, h1, hover)
+        hover.append(button)
+
+        div.onclick = () => {
+            let id_move = 0
+            hover_img2.forEach(el => el.style.opacity = '1')
+            id_move = div.getAttribute('data-move_id')
+            div.style.opacity = '1'
+            fetch(base_url + '/movie/' + id_move + '/videos', {
+                headers: {
+                    Authorization: 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3OTBjOTVlMDk4NWEyZTMzOGFlYTg1MGE3NmI4ZWJkYSIsInN1YiI6IjY1NTYwNTAzNjdiNjEzNDVkYmMxMzM4MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8vyyF9E6X99GgYd-5H6vLMKAn9jq7ik3ze9-zfOwsQw'
+                }
+            }).then(res => res.json())
+                .then(res => {
+                    let rnd = Math.floor(Math.random() * res.results.length)
+                    youtube.src = `https://www.youtube.com/embed/${res.results[0].key}`
+                })
+        }
+
+    }
+}
