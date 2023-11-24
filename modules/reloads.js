@@ -131,47 +131,6 @@ export function reload_swiper(arr, place) {
 }
 
 
-export function reload2(arr, place) {
-    for (let item of arr) {
-        let div = document.createElement('div')
-        let img = document.createElement('img')
-        let h1 = document.createElement('h1')
-        let hover = document.createElement('div')
-        let button = document.createElement('img')
-
-        button.src = '/public/play.svg'
-        button.classList.add('play')
-        div.style.marginRight = 'none'
-        img.src = `https://image.tmdb.org/t/p/w500${item.backdrop_path}`
-        h1.innerHTML = item.title
-        div.dataset.move_id = item.id
-
-        h1.classList.add('h1_post_new2')
-        hover.classList.add('hover_img2')
-        img.classList.add('img_post_new2')
-        div.classList.add('place_img2')
-        place.append(div)
-        div.append(img, h1, hover)
-        hover.append(button)
-
-        div.onclick = () => {
-            let id_move = 0
-            hover_img2.forEach(el => el.style.opacity = '1')
-            id_move = div.getAttribute('data-move_id')
-            div.style.opacity = '1'
-            fetch(base_url + '/movie/' + id_move + '/videos', {
-                headers: {
-                    Authorization: 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3OTBjOTVlMDk4NWEyZTMzOGFlYTg1MGE3NmI4ZWJkYSIsInN1YiI6IjY1NTYwNTAzNjdiNjEzNDVkYmMxMzM4MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8vyyF9E6X99GgYd-5H6vLMKAn9jq7ik3ze9-zfOwsQw'
-                }
-            }).then(res => res.json())
-                .then(res => {
-                    let rnd = Math.floor(Math.random() * res.results.length)
-                    youtube.src = `https://www.youtube.com/embed/${res.results[0].key}`
-                })
-        }
-
-    }
-}
 
 export function reload_actors(arr, place) {
     place.innerHTML = ''
@@ -264,5 +223,15 @@ export function reload_search(arr, place) {
         place.append(result)
         result.append(poster_div, result_title)
         console.log(item);
+
+        result.onclick = () => {
+            if (item.media_type === 'person') {
+                location.assign('/pages/actor_page/?id=' + item.id)
+            } else {
+                location.assign('/pages/movie_page/?id=' + item.id)
+            }
+        }
+
+
     }
 }
