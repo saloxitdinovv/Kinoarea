@@ -43,13 +43,6 @@
         <h1 class="now_in_kino">Сейчас в кино</h1>
         <hr>
         <div class="genre_menu">
-          <div class="genre active">Все</div>
-          <div class="genre">Боевики</div>
-          <div class="genre">Приключения</div>
-          <div class="genre">Комедии</div>
-          <div class="genre">Фантастика</div>
-          <div class="genre">Триллеры</div>
-          <div class="genre">Драма</div>
         </div>
       </div>
 
@@ -62,22 +55,9 @@
     <div class="next">
       <div class="container">
         <div class="trailers">
-          <div class="trailer_head">
-            <h1 class="new_trailers">Новые трейлеры</h1>
-            <button class="all_trailers">
-              Все трейлеры
-              <img src="/public/all.svg" alt="show_all">
-            </button>
-          </div>
-
-          <iframe width="420" height="315" src="https://www.youtube.com/embed/nFybJlICaR8" class="youtube">
-          </iframe>
-          <div class="tr_header">
-            <h1 class="tr_h1">Форсаж 9</h1>
-          </div>
-          <div class="container2">
-
-          </div>  
+          <h1>Новые трейлеры</h1>
+          <iframe width="100%" height="700" src="https://www.youtube.com/embed/"></iframe>
+          <div class="other_trailers"></div>
         </div>
       </div>
     </div>
@@ -89,36 +69,31 @@
           <h1 class="pop_title">Популярные фильмы</h1>
           <hr>
           <nav class="time_choose">
-            <span class="time">Все время</span>
+            <span class="time active">Все время</span>
             <span class="time">2020</span>
             <span class="time">2019</span>
             <span class="time">2018</span>
-            <span class="active_time">2017</span>
+            <span class="time">2017</span>
             <span class="time">2016</span>
             <span class="time">2015</span>
           </nav>
         </div>
 
-        <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="22"
-          slides-per-view="3">
-          <swiper-slide>Slide 1</swiper-slide>
-          <swiper-slide>Slide 2</swiper-slide>
-          <swiper-slide>Slide 3</swiper-slide>
-          <swiper-slide>Slide 4</swiper-slide>
-          <swiper-slide>Slide 5</swiper-slide>
-          <swiper-slide>Slide 6</swiper-slide>
-          <swiper-slide>Slide 7</swiper-slide>
-          <swiper-slide>Slide 8</swiper-slide>
-          <swiper-slide>Slide 9</swiper-slide>
-          <swiper-slide>Slide 10</swiper-slide>
-          <swiper-slide>Slide 10</swiper-slide>
-          <swiper-slide>Slide 10</swiper-slide>
-          <swiper-slide>Slide 10</swiper-slide>
-          <swiper-slide>Slide 10</swiper-slide>
-          <swiper-slide>Slide 10</swiper-slide>
-          <swiper-slide>Slide 10</swiper-slide>
-          <swiper-slide>Slide 10</swiper-slide>
-        </swiper-container>
+        <div class="swiper_container">
+          <div class="swiper">
+
+          </div>
+
+          <div class="pagination">
+            <div class="swiper-button-next">
+              <img src="/public/prev.svg" alt="">
+            </div>
+            <div class="swiper-button-prev">
+              <img src="/public/next.svg" alt="">
+            </div>
+          </div>
+        </div>
+
 
       </div>
     </div>

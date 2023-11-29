@@ -1,4 +1,5 @@
-let base_url = 'https://api.themoviedb.org/3'
+import { getData } from "../../modules/http";
+
 let movie_name = document.querySelector('.movie_name');
 let movie_mini_name = document.querySelector('.mini_name')
 let tagline = document.querySelector('.tagline')
@@ -8,17 +9,18 @@ let poster = document.querySelector('.poster')
 let description = document.querySelector('.description')
 let rate = document.querySelector('.rate')
 let vout_count = document.querySelector('.vout_count')
+let waiting_rate = document.querySelector('.waiting')
+let wait_rate = document.querySelector('.wait_rate')
+let year = document.querySelector('.year')
+let slogan = document.querySelector('.slogan')
+let trailer_name = document.querySelector('.trailer h2')
 
-fetch(base_url + '/movie/' + id, {
-    headers: {
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YTkwODhkZDM4MzdmYzk3NzY5OTA4NWVkM2E4NTIxMSIsInN1YiI6IjY1NTRjYWRjZWE4NGM3MTA5NDAwMDFlZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.dTIivT2f1mMQIEEf-gxzHim7irgnQgmOS1sOOE0mZJg'
-    }
-})
-    .then(res => res.json())
+
+getData('/movie/' + id)
     .then(res => {
         let title = res.title
-        
-        if(title.length > 25) {
+
+        if (title.length > 25) {
             movie_name.innerHTML = title.substring(0, 16)
         } else {
             movie_name.innerHTML = title
@@ -30,7 +32,7 @@ fetch(base_url + '/movie/' + id, {
         poster.style.backgroundImage = `url(https://image.tmdb.org/t/p/w500${res.poster_path})`
 
         let overview = res.overview
-        if(overview.length > 200) {
+        if (overview.length > 200) {
             description.innerHTML = `${overview.substring(0, 200)}...`
         } else {
             description.innerHTML = overview
@@ -38,6 +40,112 @@ fetch(base_url + '/movie/' + id, {
 
         rate.innerHTML = res.vote_average.toFixed(1)
         vout_count.innerHTML = res.vote_count
-        console.log(res);
+        if (res.runtime >= 100) {
+            waiting_rate.innerHTML = '100'
+            wait_rate.style.width = `100%`
+        } else {
+            waiting_rate.innerHTML = res.runtime
+            wait_rate.style.width = `${res.runtime}%`
+        }
+        let date = new Date(res.release_date)
+        let yearr = date.getFullYear()
+        year.innerHTML = yearr
+
+        let countries = res.production_countries
+
+        let countriesElement = document.getElementById('countries');
+        let countryNames = countries.map(country => country.name);
+        let joinedNames = countryNames.join(', ');
+        countriesElement.innerHTML = joinedNames;
+
+        slogan.innerHTML = res.tagline
+
+
+        let companies = res.production_companies
+        let companyElement = document.getElementById('companies')
+        let companyName = companies.map(company => company.name)
+        let joinCompany = companyName.join(', ')
+        companyElement.innerHTML = joinCompany
+
+        trailer_name.innerHTML = res.title
     })
 
+
+function reload_credits(arr, place) {
+    place.innerHTML = ''
+
+    for (let item of arr) {
+        let person_box = document.createElement('div')
+        let poster = document.createElement('div')
+        let title = document.createElement('h2')
+
+        person_box.classList.add('credits')
+        poster.classList.add('poster')
+        title.classList.add('title')
+
+        poster.style.backgroundImage = `url(https://image.tmdb.org/t/p/w500${item.profile_path})`;
+        title.innerHTML = item.name
+
+        place.append(person_box)
+        person_box.append(poster, title)
+    }
+}
+
+
+let actors_box = document.querySelector('.actors_box')
+
+getData(`/movie/${id}/credits`)
+    .then(res => {
+        console.log(res);
+        let cast = res.cast
+        reload_credits(cast.splice(0, 8), actors_box)
+    })
+
+
+let iframe = document.querySelector('iframe')
+getData(`/movie/${id}/videos`)
+    .then(res => {
+        let movie = res.results
+        let random_index = Math.floor(Math.random() * movie.length);
+        let random_trailer = movie[random_index];
+        let trailer_key = random_trailer.key
+
+        iframe.src = `https://www.youtube.com/embed/${trailer_key}`
+    })
+let poster_one = document.querySelector('.poster_one');
+let poster_two = document.querySelector('.poster_two');
+let poster_three = document.querySelector('.poster_three');
+let poster_four = document.querySelector('.poster_four');
+let poster_photo = document.getElementById('f');
+let poster_photo_2 = document.getElementById('t');
+let poster_photo_3 = document.getElementById('tr');
+let poster_photo_4 = document.getElementById('fr');
+
+let backdrop_photo = document.querySelector('.back')
+let backdrop_photo_2 = document.getElementById('g')
+
+getData(`/movie/${id}/images`)
+    .then(res => {
+        let posters = res.posters;
+        let backdrops = res.backdrops;
+
+        function getRandomItem(array) {
+            return array[Math.floor(Math.random() * array.length)];
+        }
+
+        poster_one.src = `https://image.tmdb.org/t/p/w500/${getRandomItem(posters).file_path}`;
+        poster_two.src = `https://image.tmdb.org/t/p/w500/${getRandomItem(posters).file_path}`;
+        poster_three.src = `https://image.tmdb.org/t/p/w500/${getRandomItem(posters).file_path}`;
+        poster_four.src = `https://image.tmdb.org/t/p/w500/${getRandomItem(posters).file_path}`;
+
+        poster_photo.src = `https://image.tmdb.org/t/p/w500/${getRandomItem(posters).file_path}`;
+        poster_photo_2.src = `https://image.tmdb.org/t/p/w500/${getRandomItem(posters).file_path}`;
+        poster_photo_3.src = `https://image.tmdb.org/t/p/w500/${getRandomItem(posters).file_path}`;
+        poster_photo_4.src = `https://image.tmdb.org/t/p/w500/${getRandomItem(posters).file_path}`;
+
+        backdrop_photo.src = `https://image.tmdb.org/t/p/w500/${getRandomItem(backdrops).file_path}`;
+        backdrop_photo_2.src = `https://image.tmdb.org/t/p/w500/${getRandomItem(backdrops).file_path}`;
+    })
+    .catch(error => {
+        console.error(error);
+    });

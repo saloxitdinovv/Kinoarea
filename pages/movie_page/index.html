@@ -76,7 +76,7 @@
                     </button>
                     <div class="waiting_rating">
                         <div class="wait_rate">
-                            <p>Рейтинг ожиданий 85%</p>
+                            <p>Рейтинг ожиданий <span class="waiting">85</span>%</p>
                         </div>
                     </div>
                     <button class="love">
@@ -85,12 +85,117 @@
                     <p class="loved_people">В избранном у <span class="vout_count">___</span> человек </p>
                 </div>
 
+                <div class="information">
+                    <div class="big_span">
+                        <span class="info_box">
+                            <p class="info_name">Год:</p>
+                            <p class="answer year"></p>
+                        </span>
+                        <span class="info_box">
+                            <p class="info_name">Страна:</p>
+                            <p class="answer" id="countries"></p>
+                        </span>
+                        <span class="info_box">
+                            <p class="info_name">Слоган:</p>
+                            <p class="answer slogan"></p>
+                        </span>
+                        <span class="info_box">
+                            <p class="info_name">Компании:</p>
+                            <p class="answer" id="companies"></p>
+                        </span>
+                        <span class="info_box">
+                            <p class="info_name">Сценарий:</p>
+                            <p class="answer">Френсис Анан</p>
+                        </span>
+                        <span class="info_box">
+                            <p class="info_name">Продюсер:</p>
+                            <p class="answer">Дэвид Барон</p>
+                        </span>
+                        <span class="info_box">
+                            <p class="info_name">Оператор:</p>
+                            <p class="answer">Джеффри Холл</p>
+                        </span>
+                        <span class="info_box">
+                            <p class="info_name">Композитор:</p>
+                            <p class="answer">Дэвид Хиршфелдер</p>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="actors">
+                    <h1>В главных ролях:</h1>
+                    <div class="actors_box"></div>
+                </div>
+
+                <div class="trailer">
+                    <h1>Трейлеры фильма</h1>
+                    <iframe src=""></iframe>
+                    <h2></h2>
+                </div>
+
+                <h1 class="awardss">Награды</h1>
+                <div class="awards">
+                    <div class="award">
+                        <img src="/public/award_one.png" alt="">
+                        <span>
+                            <p>Оскар</p>
+                            <p>Лучшая мужская роль</p>
+                            <p>2020</p>
+                        </span>
+                    </div>
+                    <div class="award">
+                        <img src="/public/award_two.png" alt="">
+                        <span>
+                            <p>Золотой глобус</p>
+                            <p>Лучшая мужская роль</p>
+                            <p>2020</p>
+                        </span>
+                    </div>
+                    <div class="award">
+                        <img src="/public/award_three.png" alt="">
+                        <span>
+                            <p>Британская академия</p>
+                            <p>Лучшая мужская роль</p>
+                            <p>2020</p>
+                        </span>
+                    </div>
+                    <div class="award">
+                        <img src="/public/award_three.png" alt="">
+                        <span>
+                            <p>Премия Гильдии актеров</p>
+                            <p>Лучшая мужская роль</p>
+                            <p>2020</p>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="posters">
+                    <h1>Постеры к фильму</h1>
+                    <div class="poster_box">
+                        <img src="" alt="" class="poster_one">
+                        <img src="" alt="" class="poster_two">
+                        <img src="" alt="" class="poster_three">
+                        <img src="" alt="" class="poster_four">
+                    </div>
+                </div>
+
+                <div class="cadres">
+                    <h1>Кадры из фильма</h1>
+                    <div class="cadres_grid">
+                        <img src="" class="photo_backdrop back"></img>
+                        <img src="" class="photo_poster" id="f"></img>
+                        <img src="" class="photo_poster" id="t"></img>
+                        <img src="" class="photo_poster" id="tr"></img>
+                        <img src="" class="photo_poster" id="fr"></img>
+                        <img src="" class="photo_backdrop" id="g"></img>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
 
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 
 </html>
