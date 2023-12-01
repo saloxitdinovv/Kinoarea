@@ -12,29 +12,7 @@
     <div class="movie_bg">
         <div class="content">
             <header>
-                <div class="container">
-                    <div class="header">
-                        <div class="head_box" id="logo">
-                            <span class="logo">
-                                <img src="/public/logo.svg" alt="Logo">
-                                <p><span>Kino</span>area</p>
-                            </span>
-                            <img src="/public/links.png" alt="">
-                        </div>
-                        <nav>
-                            <a href="#">Афиша</a>
-                            <a href="#">Медиа</a>
-                            <a href="#">Фильмы</a>
-                            <a href="#">Актёры</a>
-                            <a href="#">Новости</a>
-                            <a href="#">Подборки</a>
-                            <a href="#">Категории</a>
-                        </nav>
-                        <div class="head_box" id="buttons">
-                            <button class="search"></button>
-                            <button class="signin">Войти</button>
-                        </div>
-                    </div>
+                <div class="container" id="head_cont">
                 </div>
             </header>
 
@@ -195,7 +173,32 @@
     </div>
 
 
+    <div class="modal">
+        <div class="modal_content">
+            <button class="close">
+                <img src="https://cdn-icons-png.flaticon.com/128/4034/4034637.png" alt="">
+            </button>
+            <div class="logo_name">
+                <img src="/public/logo.svg" alt="">
+                <p><span>Kino</span>area</p>
+            </div>
+            <form name="search">
+                <div class="search_div">
+                    <input type="text" name="search" class="search_input">
+                    <button class="searching">
+                        <img src="/public/searching.svg" alt="">
+                    </button>
+                </div>
+            </form>
+
+            <div class="results">
+            </div>
+        </div>
+    </div>
+
+
     <script type="module" src="script.js"></script>
+    <script type="module" src="/modules/header.js"></script>
 </body>
 
 </html>

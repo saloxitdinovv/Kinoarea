@@ -11,29 +11,8 @@
 <body>
 
     <header>
-        <div class="container">
-            <div class="header">
-                <div class="head_box" id="logo">
-                    <span class="logo">
-                        <img src="/public/logo.svg" alt="Logo">
-                        <p><span>Kino</span>area</p>
-                    </span>
-                    <img src="/public/links.png" alt="">
-                </div>
-                <nav>
-                    <a href="#">Афиша</a>
-                    <a href="#">Медиа</a>
-                    <a href="#">Фильмы</a>
-                    <a href="#">Актёры</a>
-                    <a href="#">Новости</a>
-                    <a href="#">Подборки</a>
-                    <a href="#">Категории</a>
-                </nav>
-                <div class="head_box" id="buttons">
-                    <button class="search"></button>
-                    <button class="signin">Войти</button>
-                </div>
-            </div>
+        <div class="container" id="head_cont">
+
         </div>
     </header>
 
@@ -47,6 +26,7 @@
 
                     <div class="biography">
                         <h1 class="bio">Информация <span>Биография</span></h1>
+
                         <p class="biog"></p>
                     </div>
                 </div>
@@ -87,6 +67,25 @@
                 </div>
             </div>
 
+            <div class="swiper_container">
+                <div class="head">
+                    <h1>Лучшие фильмы</h1>
+
+                    <div class="pagination">
+                        <div class="swiper-button-next">
+                            <img src="/public/prev.svg" alt="">
+                        </div>
+                        <div class="swiper-button-prev">
+                            <img src="/public/next.svg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper">
+
+                </div>
+
+            </div>
+
             <div class="cadres">
                 <h1>Фото</h1>
                 <div class="cadres_grid">
@@ -98,10 +97,49 @@
                     <img src="" class="photo_backdrop" id="g"></img>
                 </div>
             </div>
+
+            <div class="swiper_movies">
+                <swiper-container class="mySwiper" space-between="0" pagination="true" pagination-clickable="true">
+                    <swiper-slide>Slide 1</swiper-slide>
+                    <swiper-slide>Slide 2</swiper-slide>
+                    <swiper-slide>Slide 3</swiper-slide>
+                    <swiper-slide>Slide 4</swiper-slide>
+                    <swiper-slide>Slide 5</swiper-slide>
+                    <swiper-slide>Slide 6</swiper-slide>
+                    <swiper-slide>Slide 7</swiper-slide>
+                    <swiper-slide>Slide 8</swiper-slide>
+                    <swiper-slide>Slide 9</swiper-slide>
+                </swiper-container>
+            </div>
         </div>
     </div>
 
+    <div class="modal">
+        <div class="modal_content">
+            <button class="close">
+                <img src="https://cdn-icons-png.flaticon.com/128/4034/4034637.png" alt="">
+            </button>
+            <div class="logo_name">
+                <img src="/public/logo.svg" alt="">
+                <p><span>Kino</span>area</p>
+            </div>
+            <form name="search">
+                <div class="search_div">
+                    <input type="text" name="search" class="search_input">
+                    <button class="searching">
+                        <img src="/public/searching.svg" alt="">
+                    </button>
+                </div>
+            </form>
+
+            <div class="results">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
     <script type="module" src="script.js"></script>
+    <script type="module" src="/modules/header.js"></script>
 </body>
 
 </html>

@@ -1,4 +1,6 @@
+import { fadeOutModal } from "../../modules/functions";
 import { getData } from "../../modules/http";
+import { reload_search } from "../../modules/reloads";
 
 let movie_name = document.querySelector('.movie_name');
 let movie_mini_name = document.querySelector('.mini_name')
@@ -14,6 +16,9 @@ let wait_rate = document.querySelector('.wait_rate')
 let year = document.querySelector('.year')
 let slogan = document.querySelector('.slogan')
 let trailer_name = document.querySelector('.trailer h2')
+let form = document.forms.search
+let inp = document.querySelector('.search_input')
+let place = document.querySelector('.results')
 
 
 getData('/movie/' + id)
@@ -88,6 +93,10 @@ function reload_credits(arr, place) {
 
         place.append(person_box)
         person_box.append(poster, title)
+
+        poster.onclick = () => {
+            location.assign('/pages/actor_page/?id=' + item.id)
+        }
     }
 }
 
@@ -96,7 +105,6 @@ let actors_box = document.querySelector('.actors_box')
 
 getData(`/movie/${id}/credits`)
     .then(res => {
-        console.log(res);
         let cast = res.cast
         reload_credits(cast.splice(0, 8), actors_box)
     })
@@ -149,3 +157,48 @@ getData(`/movie/${id}/images`)
     .catch(error => {
         console.error(error);
     });
+
+
+
+
+
+form.onsubmit = (e) => {
+    e.preventDefault();
+
+    let error = false;
+
+    if (inp.value.length === 0) {
+        error = true;
+        inp.classList.add("error");
+    } else {
+        inp.classList.remove("error");
+    }
+
+    if (error) {
+        return error
+    } else {
+        submit()
+    }
+
+}
+
+function submit() {
+    let user = {};
+
+    let fm = new FormData(form);
+
+    fm.forEach((value, key) => {
+        user[key] = value;
+    });
+
+
+    let search_object = user.search
+
+    getData(`/search/multi?query=${search_object}`)
+        .then(res => {
+            reload_search(res.results, place)
+        })
+}
+
+let close_modal = document.querySelector('.close')
+close_modal.onclick = fadeOutModal;

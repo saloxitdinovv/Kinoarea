@@ -40,7 +40,6 @@ getData('/person/popular')
 
 
 
-search_button.onclick = fadeInModal;
 
 close_modal.onclick = fadeOutModal;
 
@@ -61,7 +60,6 @@ form.onsubmit = (e) => {
         return error
     } else {
         submit()
-        inp.value = ''
     }
 
 }

@@ -30,7 +30,12 @@ export function reload(arr, place) {
         movie_genre.classList.add('movie_genre')
 
 
-        poster.style.backgroundImage = `url(https://image.tmdb.org/t/p/w500${item.poster_path})`
+
+        if (item.poster_path) {
+            poster.style.backgroundImage = `url(https://image.tmdb.org/t/p/w500${item.poster_path})`
+        } else {
+            poster.style.backgroundImage = `url(https://image.tmdb.org/t/p/w500${item.backdrop_path})`
+        }
 
         rating.innerHTML = item.vote_average.toFixed(1)
         movie_card.innerHTML = 'Карточка фильма'
@@ -209,7 +214,7 @@ export function reload_trailers(arr, place) {
         play_button.classList.add('play_btn');
         active_trailer.classList.add('active_trailer');
 
-        if(item.backdrop_path === null) {
+        if (item.backdrop_path === null) {
             trailer.style.backgroundImage = `url(https://image.tmdb.org/t/p/w500${item.poster_path})`;
         } else {
             trailer.style.backgroundImage = `url(https://image.tmdb.org/t/p/w500${item.backdrop_path})`;
@@ -250,5 +255,64 @@ export function reload_trailers(arr, place) {
                     iframe.src = `https://www.youtube.com/embed/${trailer_key}`
                 })
         }
+    }
+}
+
+
+export function reload_actorS_movies(arr, place) {
+    place.innerHTML = ''
+
+    for (let item of arr) {
+        let swiper = document.createElement('swiper-slide')
+
+        let first = document.createElement('div')
+        let second = document.createElement('div')
+
+        let poster = document.createElement('img')
+
+        let movie_info_box = document.createElement('div')
+        let movie_name = document.createElement('h1')
+        let movie_character = document.createElement('p')
+        let movie_genres = document.createElement('p')
+
+
+        let rate_box = document.createElement('div')
+        let rating = document.createElement('p')
+        let rate_text = document.createElement('p')
+
+        let button = document.createElement('button')
+
+
+        poster.src = `https://image.tmdb.org/t/p/w500${item.poster_path}`
+
+        movie_name.innerHTML = item.title
+        movie_character.innerHTML = item.character
+        movie_genres.innerHTML = item.genres
+        rating.innerHTML = item.vote_average.toFixed(2)
+        rate_text.innerHTML = 'Kinoarea'
+        button.innerHTML = 'Карточка фильма'
+
+        swiper.classList.add('m_swipe')
+        movie_info_box.classList.add('m_movie_info')
+        rate_box.classList.add('m_movie_rate')
+        rating.classList.add('rate_box_rate')
+
+        first.classList.add('first')
+        second.classList.add('second')
+
+
+        place.append(swiper)
+        swiper.append(first, second)
+        first.append(poster, movie_info_box)
+        second.append(rate_box, button)
+        movie_info_box.append(movie_name, movie_character, movie_genres)
+        rate_box.append(rating, rate_text)
+
+
+        button.onclick = () => {
+            location.assign('/pages/movie_page/?id=' + item.id)
+        }
+
+        console.log(item);
     }
 }
