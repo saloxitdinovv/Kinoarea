@@ -202,3 +202,19 @@ function submit() {
 
 let close_modal = document.querySelector('.close')
 close_modal.onclick = fadeOutModal;
+
+
+
+const watchButton = document.querySelector('.watch');
+
+// Get the iframe element
+const trailerIframe = document.querySelector('.trailer');
+
+watchButton.addEventListener('click', function () {
+    const targetScrollPosition = trailerIframe.offsetTop;
+
+    window.scroll({
+        top: targetScrollPosition,
+        behavior: 'smooth'
+    });
+});

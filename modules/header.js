@@ -69,5 +69,5 @@ searchButton.onclick = fadeInModal;
 
 signinButton.onclick = (event) => {
     event.preventDefault();
-    location.assign('/pages/profile');
+    location.assign('/pages/profile/');
 };
