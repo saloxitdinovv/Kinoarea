@@ -191,7 +191,10 @@ export function reload_genres(arr, place) {
             })
             genre_div.classList.add('active')
             getData('/discover/movie?with_genres=' + genre.id)
-                .then(res => reload(res.results, grid_box))
+            .then(res => {
+                    let movies = res.results
+                    reload(movies.slice(0, 8), grid_box)
+                })
         }
     }
 }

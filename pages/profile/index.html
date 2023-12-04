@@ -1,12 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Profile</title>
+    <link rel="stylesheet" href="style.scss">
+    <link rel="shortcut icon" href="/public/logo.svg" type="image/png">
 </head>
+
 <body>
-    <h1>profile</h1>
-    
+    <header>
+        <div class="container" id="head_cont">
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="profile_big_box">
+            <div class="actor_box" id="profile_buttons">
+                <button>
+                    <img src="/public/home.svg" alt="">
+                </button>
+                <button>
+                    <img src="/public/friends.svg" alt="">
+                </button>
+                <button>
+                    <img src="/public/comments.svg" alt="">
+                </button>
+                <button>
+                    <img src="/public/like_not.svg" alt="">
+                </button>
+                <button>
+                    <img src="/public/chats.svg" alt="">
+                </button>
+                <button>
+                    <img src="/public/movies.svg" alt="">
+                </button>
+                <button>
+                    <img src="/public/stars.svg" alt="">
+                </button>
+            </div>
+            <div class="actor_box" id="profile_box">
+                <div class="profile_head">
+                    <h1>Ваш профиль</h1>
+                    <span>
+                        <button class="settings_btn">
+                            <img src="/public/settings.svg" alt="">
+                            Настройки
+                        </button>   
+                    </span>
+                    
+                </div>
+                <div class="profile_body">
+                    <img class="avatar" src="/public/avatar.png" alt="">
+                    <div class="profile_info">
+                        <h1 class="profile_name">Евгений Батиков</h1>
+                        <img src="/public/links.png" alt="">
+                        <p class="bio">
+                            Учитывая ключевые сценарии поведения, базовый вектор развития, а также свежий взгляд на
+                            привычные вещи - безусловно открывает новые горизонты для поставленных обществом задач.
+                        </p>
+                        <div class="info">
+                            <div class="div_a">
+                                <p>Пол:</p>
+                                <p>День рождения:</p>
+                                <p>Страна:</p>
+                                <p>Город:</p>
+                                <p>Любимые жанры:</p>
+                            </div>
+                            <div class="div_b">
+                                <p class="gender_choose">Мужской</p>
+                                <p class="date">24 мая 1991 г. (28 лет)</p>
+                                <p class="country">Россия</p>
+                                <p class="city">Москва</p>
+                                <p class="genre">Драма, триллер, документальный</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings">
+                        <form name="setting">
+                            <span>
+                                <input type="text" name="name" placeholder="Имя">
+                                <input type="text" name="surname" placeholder="Фамлия">
+                            </span>
+                            <span>
+                                <select name="gender" id="gender">
+                                    <option value="Мужской">Мужской</option>
+                                    <option value="Женский">Женский</option>
+                                </select>
+                                <input type="date" name="date">
+                            </span>
+                            <span>
+                                <select name="country" id="country">
+                                    <option value="Russia" selected>Россия</option>
+                                </select>
+                                <select name="city" id="region">
+                                    <option value="Moscow" selected>Москва</option>
+                                </select>
+                            </span>
+                            <select name="genres" id="genres"></select>
+                            <textarea name="bio" id="biography" cols="30" rows="10" placeholder="Информация о себе"></textarea>
+                            <button class="save" type="submit">
+                                <img src="/public/save.svg" alt="">
+                                Сохранить
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="module" src="/modules/header.js"></script>
+    <script type="module" src="script.js"></script>
+
 </body>
+
 </html>

@@ -30,10 +30,10 @@ getData('/movie/popular')
         movies = res.results
         reload_trailers(movies, trailers)
     })
-
-
-
-getData('/person/popular')
+    
+    
+    
+    getData('/person/popular')
     .then(res => {
         reload_actors(res.results, person_box)
     })
